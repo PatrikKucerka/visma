@@ -1,0 +1,21 @@
+FROM golang:1.22 AS builder
+
+WORKDIR /app
+
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+
+COPY . .
+
+RUN CGO_ENABLED=0 go build cmd/service/v1/main.go
+
+FROM debian:buster-slim AS runner
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates
+
+COPY --from=builder /app/main /app/main
+
+ENTRYPOINT ["/app/main"]
