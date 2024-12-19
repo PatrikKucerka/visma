@@ -45,8 +45,8 @@ Apart from that, you will need to change [the API endpoint](./pkg/api/api.go) so
 ## Optional: Trying out the code in kubernetes with Minikube
 
 ### What you'll need
-- [Docker](https://docs.docker.com/engine/install/) (optional)
-- [Minikube](https://minikube.sigs.k8s.io/docs/start) (optional)
+- [Docker](https://docs.docker.com/engine/install/)
+- [Minikube](https://minikube.sigs.k8s.io/docs/start)
 
 ### Kubernetes setup
 1. Run `minikube start` to start up the cluster. 
