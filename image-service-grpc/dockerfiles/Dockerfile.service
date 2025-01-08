@@ -7,13 +7,12 @@ COPY go.sum .
 
 RUN go mod download
 
-COPY cmd/service /app/cmd/service
+COPY cmd/imgservice /app/cmd/imgservice
 COPY github.com/vismaml/hiring/image-service-grpc/proto /app/github.com/vismaml/hiring/image-service-grpc/proto
-COPY pkg/api /app/pkg/api
+COPY pkg/service /app/pkg/service
 COPY proto /app/proto
 
-RUN CGO_ENABLED=0 go build cmd/service/v1/main.go
-
+RUN CGO_ENABLED=0 go build -o /app/main ./cmd/imgservice/imgservice.go
 FROM debian:buster-slim AS runner
 
 WORKDIR /app

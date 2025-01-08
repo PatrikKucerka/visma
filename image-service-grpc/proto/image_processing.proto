@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package image_processing;
+option go_package = "github.com/vismaml/hiring/image-service-grpc/proto;image_processing";
+
+message Image {
+    bytes image_data = 1;   // Image
+    bool scale = 2; //whether scale
+    bool grayscale = 3; //whether grayscale
+    string content_type = 4; // MIME type (jpeg or png)
+    int32 width = 5; //width
+    int32 height = 6; //height
+    string url = 7; //url if provided
+}
+
+service ImageProcessingService {
+    rpc ProcessImage(Image) returns (ProcessImageResponse);
+}
+
+message ProcessImageResponse {
+    string status = 1;   // Status of the image processing (success / failure)
+    bytes processed_image = 2; // Send back the processed image
+}

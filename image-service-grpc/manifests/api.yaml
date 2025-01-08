@@ -9,3 +9,10 @@ spec:
       imagePullPolicy: Never
       ports:
         - containerPort: 8080
+      volumeMounts:
+        - name: env-volume
+          mountPath: /app/.env  # This will be the location where godotenv will load the file from
+  volumes:
+    - name: env-volume
+      hostPath:
+        path: /mnt/img_service/.env  # Path to the .env file on the host machine
